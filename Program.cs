@@ -1,6 +1,6 @@
 ﻿using Pong;
 
-Form1 form = new();
+PongForm form = new();
 form.Show();
 //Application.Run(form);
 //var game = new Game1(form.GetDrawSurface());

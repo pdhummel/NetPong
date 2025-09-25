@@ -206,13 +206,21 @@ public class Server
                 JsonSerializer.Deserialize<Pong.PongAction>(jsonString);
         if (action == null || (action != null && !"move".Equals(action.Type)))
             Console.WriteLine($"OnNetworkReceive(): Server [Received] from {peer.Address}: {jsonString}");
-        if ("left".Equals(action?.ClientIdentifier) && "up".Equals(action.Direction) && gameState.LeftPaddleTopY > 0)
+        if ("left".Equals(action?.ClientIdentifier) &&
+            "up".Equals(action.Direction) &&
+            gameState.LeftPaddleTopY > 0 &&
+            action.GameTime != null
+           )
         {
             gameState.LeftPaddleTopY -= (int)(moveSpeed * (float)action.GameTime.ElapsedGameTime.TotalSeconds);
             if (gameState.LeftPaddleTopY < 0)
                 gameState.LeftPaddleTopY = 0;
         }
-        if ("left".Equals(action?.ClientIdentifier) && "down".Equals(action.Direction) && gameState.LeftPaddleTopY < Globals.HEIGHT - Paddle.sizeY)
+        if ("left".Equals(action?.ClientIdentifier) &&
+            "down".Equals(action.Direction) &&
+            gameState.LeftPaddleTopY < Globals.HEIGHT - Paddle.sizeY &&
+            action.GameTime != null
+           )
         {
             gameState.LeftPaddleTopY += (int)(moveSpeed * (float)action.GameTime.ElapsedGameTime.TotalSeconds);
             if (gameState.LeftPaddleTopY > Globals.HEIGHT - Paddle.sizeY)
@@ -220,13 +228,21 @@ public class Server
                 gameState.LeftPaddleTopY = Globals.HEIGHT - Paddle.sizeY;
             }
         }
-        if ("right".Equals(action?.ClientIdentifier) && "up".Equals(action.Direction) && gameState.LeftPaddleTopY > 0)
+        if ("right".Equals(action?.ClientIdentifier) &&
+            "up".Equals(action.Direction) &&
+            gameState.LeftPaddleTopY > 0 &&
+            action.GameTime != null
+           )
         {
             gameState.RightPaddleTopY -= (int)(moveSpeed * (float)action.GameTime.ElapsedGameTime.TotalSeconds);
             if (gameState.RightPaddleTopY < 0)
                 gameState.RightPaddleTopY = 0;
         }
-        if ("right".Equals(action?.ClientIdentifier) && "down".Equals(action.Direction) && gameState.LeftPaddleTopY < Globals.HEIGHT - Paddle.sizeY)
+        if ("right".Equals(action?.ClientIdentifier) &&
+            "down".Equals(action.Direction) &&
+            gameState.LeftPaddleTopY < Globals.HEIGHT - Paddle.sizeY &&
+            action.GameTime != null
+           )
         {
             gameState.RightPaddleTopY += (int)(moveSpeed * (float)action.GameTime.ElapsedGameTime.TotalSeconds);
             if (gameState.RightPaddleTopY > Globals.HEIGHT - Paddle.sizeY)

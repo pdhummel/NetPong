@@ -37,6 +37,7 @@ public class Client
             IsBackground = true // Ensures thread closes with the main app
         };
         clientThread.Start();
+        PongAction action = new(clientIdentifier);
     }
 
 
